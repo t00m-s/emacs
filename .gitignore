@@ -15,3 +15,10 @@ dist/
 
 # Undo-tree save-files
 *.~undo-tree
+
+eln-cache/**
+elpa/**
+
+history
+places
+recentf
