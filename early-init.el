@@ -78,6 +78,31 @@
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (setq package-enable-at-startup nil)
 
+
+;; Create the backup directory if it doesn't exist
+(make-directory "~/.emacs-backups/" t)
+(setq backup-directory-alist '(("." . "~/.emacs-backups")))
+;; Make numbered backups
+(setq version-control t)
+
+;; Don't ask to delete excess backup versions
+(setq delete-old-versions t)
+
+;; Keep this many newest versions
+(setq kept-new-versions 6)
+
+;; Keep this many oldest versions
+(setq kept-old-versions 2)
+
+;; Use normal mode for backups (not making a new copy each time)
+(setq backup-by-copying nil)
+;; Put auto-save files in a specific directory
+
+;; Create the auto-save directory if needed
+(make-directory (concat user-emacs-directory "auto-saves/") t)
+(setq auto-save-file-name-transforms
+      `((".*" ,(concat user-emacs-directory "auto-saves/") t)))
+
 ;; So we can detect this having been loaded
 (provide 'early-init)
 ;;; early-init.el ends here

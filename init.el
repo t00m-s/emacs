@@ -21,5 +21,6 @@
 (require 'init-options)
 (require 'init-display)
 (require 'init-theme)
+(require 'init-evil)
 (require 'init-writing)
 ;;; init.el ends here
