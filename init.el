@@ -19,6 +19,7 @@
         ("nongnu"       . 0)))
 (package-initialize)
 (require 'init-options)
+(require 'init-utils)
 (require 'init-display)
 (require 'init-theme)
 (require 'init-evil)
