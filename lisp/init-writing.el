@@ -15,9 +15,17 @@
              (setq org-log-done 'time))
 
 (use-package org-roam
-             :ensure t
-             :custom
-             (org-roam-directory (file-truename "~/notes/")))
+  :ensure t
+  :custom
+  (org-roam-directory (file-truename "~/notes/"))
+  :config
+  (org-roam-db-autosync-mode)  ;; Keep database synced
+  (setq org-roam-capture-templates
+        '(("d" "default" plain
+           "%?"
+           :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                             "#+title: ${title}\n")
+           :unnarrowed t))))
 
 (use-package flyspell
   :hook (org-mode . flyspell-mode))
