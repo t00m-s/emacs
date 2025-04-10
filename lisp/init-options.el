@@ -1,4 +1,4 @@
-;;; init-writing.el --- Setting theme. -*- lexical-binding: t -*-
+;;; init-options.el --- Various options -*- lexical-binding: t -*-
 (delete-selection-mode   t) ;; Replace selected text when yanking
 (global-so-long-mode     t) ;; Mitigate performance for long lines
 (global-visual-line-mode t) ;; Break lines instead of truncating them
