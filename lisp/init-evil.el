@@ -8,6 +8,8 @@
   (setq scroll-conservatively 101)
   (evil-mode 1)
   :config
+  (evil-define-key 'normal dired-mode-map (kbd "RET") 'dired-find-file)
+  (evil-define-key 'normal dired-mode-map (kbd "<return>") 'dired-find-file)
   (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
   (define-key evil-normal-state-map (kbd "C-a") 'mark-whole-buffer)
   (define-key evil-insert-state-map (kbd "C-a") 'mark-whole-buffer))
@@ -38,6 +40,8 @@
   (my-leader-def
     "s" '(:ignore t :which-key "[S]earch")
     "sf" '(find-file :which-key "[S]earch [F]ile")
+    "sh" '(split-window-below :which-key "[S]plit [H]orizontal")
+    "sv" '(split-window-right :which-key "[S]plit [V]ertical")
 
     "b" '(:ignore t :which-key "[B]uffer")
     "bd" '(kill-buffer :which-key "[B]uffer [D]elete")
@@ -46,6 +50,7 @@
     "nc" '(org-capture :which-key "[C]apture")
     "na" '(org-agenda :which-key "[A]genda")
 
+    "p" '(:ignore t :which-key "[P]roject")
     "pv" '(dired-fullscreen :which-key "[P]roject [V]iew")))
 (provide 'init-evil)
 ;;; init-evil.el ends here
