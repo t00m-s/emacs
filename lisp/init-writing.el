@@ -12,7 +12,14 @@
              (setq org-hide-leading-stars t)
              (setq org-todo-keywords
                '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
-             (setq org-log-done 'time))
+             (setq org-log-done 'time)
+             ;; Enable basic syntax highlighting in code blocks
+             (setq org-src-fontify-natively t)
+             (setq org-src-tab-acts-natively t)
+             ;; Auto-enable Olivetti mode for org files
+             (add-hook 'org-mode-hook 'olivetti-mode)
+             ;; Automatically enable auto-fill-mode in org documents
+             (add-hook 'org-mode-hook 'auto-fill-mode))
 
 (use-package org-roam
   :ensure t
@@ -28,7 +35,9 @@
            :unnarrowed t))))
 
 (use-package flyspell
-  :hook (org-mode . flyspell-mode))
+  :hook
+  (org-mode . flyspell-mode)
+  (text-mode . flyspell-mode))
 
 (use-package evil-org
   :ensure t
@@ -38,5 +47,9 @@
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
 
+;; Prettier bullets for org-mode
+(use-package org-bullets
+  :ensure t
+  :hook (org-mode . org-bullets-mode))
 (provide 'init-writing)
 ;;; init-writing.el ends here
