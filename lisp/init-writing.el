@@ -9,17 +9,31 @@
              :config
              (setq org-directory "~/notes/")
              (setq org-default-notes-file (concat org-directory "default-note.org"))
-             (setq org-hide-leading-stars t)
              (setq org-todo-keywords
                '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
              (setq org-log-done 'time)
              ;; Enable basic syntax highlighting in code blocks
              (setq org-src-fontify-natively t)
              (setq org-src-tab-acts-natively t)
+	     (setq org-adapt-indentation t)
+	     (setq org-hide-leading-stars t)
+	     (setq org-hide-emphasis-markers t)
+	     (setq org-pretty-entities t)
+	     (setq org-src-fontify-natively t)
+	     (setq org-src-tab-acts-natively t)
+	     (setq org-edit-src-content-indentation 0)
+	     ;; Auto-enable visual-line mode for org files
+	     (add-hook 'org-mode-hook 'visual-line-mode)
              ;; Auto-enable Olivetti mode for org files
              (add-hook 'org-mode-hook 'olivetti-mode)
              ;; Automatically enable auto-fill-mode in org documents
              (add-hook 'org-mode-hook 'auto-fill-mode))
+
+(use-package org-modern
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook #'org-modern-mode)
+  (add-hook 'org-agenda-finalize-hook #'org-modern-agenda))
 
 (use-package org-roam
   :ensure t
