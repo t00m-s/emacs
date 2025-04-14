@@ -16,5 +16,16 @@
       use-dialog-box                    nil)    ;; Disable dialog
 
 (global-display-line-numbers-mode 1)
+(setq scroll-margin 5
+      scroll-conservatively 9999
+      scroll-step 1)
+(global-prettify-symbols-mode 1)
+
+(setq-default mode-line-format
+              '(" "
+                mode-name
+                " | "
+                mode-line-buffer-identification
+                " %l:%c "))
 (provide 'init-display)
 ;;; init-display.el ends here
