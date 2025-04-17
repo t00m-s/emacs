@@ -8,7 +8,7 @@
              :ensure t
              :config
              (setq org-directory "~/notes/")
-             (setq org-default-notes-file (concat org-directory "default-note.org"))
+             (setq org-default-notes-file (concat org-directory "default.org"))
              (setq org-todo-keywords
                '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
              (setq org-log-done 'time)
@@ -27,7 +27,9 @@
              ;; Auto-enable Olivetti mode for org files
              (add-hook 'org-mode-hook 'olivetti-mode)
              ;; Automatically enable auto-fill-mode in org documents
-             (add-hook 'org-mode-hook 'auto-fill-mode))
+             (add-hook 'org-mode-hook 'auto-fill-mode)
+	     ;; Updates the last_update property on save.
+	     (add-hook 'before-save-hook 'update-org-modification-time))
 
 (use-package org-modern
   :ensure t
@@ -40,13 +42,17 @@
   :custom
   (org-roam-directory (file-truename "~/notes/"))
   :config
-  (org-roam-db-autosync-mode)  ;; Keep database synced
+  (org-roam-db-autosync-mode)
   (setq org-roam-capture-templates
         '(("d" "default" plain
            "%?"
            :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
                              "#+title: ${title}\n")
-           :unnarrowed t))))
+           :unnarrowed t)))
+(setq org-capture-templates
+      '(("n" "Note" entry
+         (file org-default-notes-file)
+         "* %?\n:PROPERTIES:\n:CREATED: %U\n:DATE_CREATED: %t\n:LAST_MODIFIED: %t\n:AUTHOR: Tommaso Soncin\n:END:\n\n")))
 
 (use-package flyspell
   :hook
