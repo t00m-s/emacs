@@ -27,15 +27,37 @@
 
   (define-key evil-normal-state-map [escape] 'keyboard-quit)
   (define-key evil-visual-state-map [escape] 'keyboard-quit)
-  (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit))
+  (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+
+  (evil-set-initial-state 'ibuffer-mode 'normal)
+  ;; Buffer navigation with Shift-h/l (like Neovim)
+(define-key evil-normal-state-map (kbd "S-h") 'previous-buffer)
+(define-key evil-normal-state-map (kbd "S-l") 'next-buffer)
+
+;; Fix typo commands (for :wq and :w)
+(evil-ex-define-cmd "W" 'evil-write)
+(evil-ex-define-cmd "Wq" 'evil-save-and-close)
+(evil-ex-define-cmd "WQ" 'evil-save-and-close)
+
+;; X deletion does not save to register
+(define-key evil-normal-state-map "x" (lambda () (interactive) (evil-delete-char (point) (1+ (point)) ?_)))
+(define-key evil-insert-state-map (kbd "C-s")
+  (lambda () (interactive) (evil-normal-state) (save-buffer) (evil-insert-state)))
+)
+
+(use-package evil-collection
+  :ensure t
+  :after evil
+  :config
+  (evil-collection-init 'ibuffer))
 
 ;; Add visual selection surround functionality
 (use-package evil-surround
   :ensure t
+  :after evil
   :config
   (global-evil-surround-mode 1)
-  ;; Make it work like mini.surround in neovim with visual selection
-  (evil-define-key 'visual evil-surround-mode-map "s" 'evil-surround-region))
+  (evil-define-key 'visual evil-surround-mode-map "sa" 'evil-surround-region))
 
 (use-package which-key
   :ensure t
@@ -47,6 +69,7 @@
 ;; Set up general.el for leader key functionality
 (use-package general
   :ensure t
+  :after evil
   :config
   (general-create-definer my-leader-def
     :states '(normal visual insert emacs)
