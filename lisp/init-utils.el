@@ -1,10 +1,10 @@
 ;;; init-utils.el --- Utility functions -*- lexical-binding: t -*-
-
 (defun dired-fullscreen ()
   "Open dired in full screen, similar to oil.nvim"
   (interactive)
   (dired default-directory)
   (delete-other-windows))
+
 (defun reload-config ()
   "Reload Emacs config and refresh packages. No drama."
   (interactive)
@@ -12,10 +12,8 @@
   (when (boundp 'package-archives)
     (package-refresh-contents))
   (when (fboundp 'use-package-report)
-    (message "Re-evaluating use-package declarations..."))
-  (unless package-archive-contents
-    (package-refresh-contents))
-    (package-install-selected-packages))
+    (use-package-report))
+  (package-install-selected-packages))
 
 (use-package auto-package-update
   :ensure t
@@ -30,5 +28,13 @@
   "Set Catppuccin FLAVOR and reload theme."
   (setq catppuccin-flavor flavor)
   (load-theme 'catppuccin :no-confirm))
+(defun update-org-modification-time ()
+  "Update the LAST_MODIFIED property in org files when saving."
+  (when (derived-mode-p 'org-mode)
+    (save-excursion
+      (goto-char (point-min))
+      (when (re-search-forward ":LAST_MODIFIED:" nil t)
+        (org-set-property "LAST_MODIFIED" (format-time-string "%Y-%m-%d %H:%M:%S"))))))
+
 (provide 'init-utils)
 ;;; init-utils.el ends here
