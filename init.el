@@ -22,6 +22,7 @@
 (require 'init-utils)
 (require 'init-display)
 (require 'init-theme)
-(require 'init-evil)
+(setq evil-want-keybinding nil)
 (require 'init-writing)
+(require 'init-evil)
 ;;; init.el ends here

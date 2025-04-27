@@ -28,6 +28,7 @@
   "Set Catppuccin FLAVOR and reload theme."
   (setq catppuccin-flavor flavor)
   (load-theme 'catppuccin :no-confirm))
+
 (defun update-org-modification-time ()
   "Update the LAST_MODIFIED property in org files when saving."
   (when (derived-mode-p 'org-mode)
@@ -35,6 +36,12 @@
       (goto-char (point-min))
       (when (re-search-forward ":LAST_MODIFIED:" nil t)
         (org-set-property "LAST_MODIFIED" (format-time-string "%Y-%m-%d %H:%M:%S"))))))
+
+(defun org-read-file-name ()
+  "Return a file path for org-capture to use."
+  (let* ((default-name "quick-note")
+         (name (read-string "Note name (default: quick-note): ")))
+    (expand-file-name (format "%s.org" (if (string-empty-p name) default-name name)) org-directory)))
 
 (provide 'init-utils)
 ;;; init-utils.el ends here

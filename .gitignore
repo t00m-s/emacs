@@ -18,7 +18,7 @@ dist/
 
 eln-cache/**
 elpa/**
-
+auto-saves/**
 history
 places
 recentf
