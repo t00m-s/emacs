@@ -3,10 +3,9 @@
 ;; --- Org Mode Configuration ----------------------------------------
 (use-package org
   :defer nil
-  :init
-  ;; Setup modules before loading org
-  (add-to-list 'org-modules 'org-habit t)
-  :hook ((org-mode . (visual-line-mode olivetti-mode auto-fill-mode)))
+  :hook ((org-mode . visual-line-mode)
+         (org-mode . olivetti-mode)
+         (org-mode . auto-fill-mode))
   :custom
   (org-directory "~/notes/")
   (org-default-notes-file (concat org-directory "default.org"))
@@ -20,9 +19,12 @@
   (org-hide-emphasis-markers t)
   (org-pretty-entities t)
   (calendar-week-start-day 1)
+  (org-treat-insert-todo-heading-as-state-change t)
+  (org-log-into-drawer t)
   :config
   (add-hook 'before-save-hook #'org-update-modification-time))
 
+(add-to-list 'org-modules 'org-habit t)
 ;; --- Visual Enhancements for Org -----------------------------------
 
 (use-package olivetti
