@@ -88,13 +88,7 @@
     "n" '(:ignore t :which-key "[N]otes")
     "nc" '(org-capture :which-key "[C]apture")
     "na" '(org-agenda :which-key "[A]genda")
-    "ns" '(:ignore t :which-key "[S]et")
-    "nst" '((lambda () (interactive) (org-todo "TODO(t)")) :which-key "[T]ODO")
-    "nsn" '((lambda () (interactive) (org-todo "NEXT(n)")) :which-key "[N]EXT")
-    "nsw" '((lambda () (interactive) (org-todo "WAITING(w)")) :which-key "[W]AITING")
-    "nsd" '((lambda () (interactive) (org-todo "DONE(d)")) :which-key "[D]ONE")
-    "nsc" '((lambda () (interactive) (org-todo "CANCELLED(c)")) :which-key "[C]ANCELLED")
-
+    "ns" '((lambda () (interactive) (org-todo)) :which-key "[S]et")
 
     "p" '(:ignore t :which-key "[P]roject")
     "pv" '(dired-fullscreen :which-key "[V]iew")
